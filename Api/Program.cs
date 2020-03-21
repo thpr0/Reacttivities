@@ -23,7 +23,8 @@ namespace Api
                 try
                 {
                     var context=services.GetRequiredService<DataContext>();
-                    context.Database.Migrate();                    
+                    context.Database.Migrate();  
+                    Seed.SeedData(context);
                 }
                 catch (System.Exception ex)
                 {                    
