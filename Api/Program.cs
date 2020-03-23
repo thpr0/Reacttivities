@@ -15,21 +15,21 @@ namespace Api
     {
         public static void Main(string[] args)
         {
-            var host=CreateHostBuilder(args).Build();
+            var host = CreateHostBuilder(args).Build();
 
-            using(var scope=host.Services.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
-                var services=scope.ServiceProvider;
+                var services = scope.ServiceProvider;
                 try
                 {
-                    var context=services.GetRequiredService<DataContext>();
-                    context.Database.Migrate();  
+                    var context = services.GetRequiredService<DataContext>();
+                    context.Database.Migrate();
                     Seed.SeedData(context);
                 }
                 catch (System.Exception ex)
-                {                    
-                   var logger=services.GetRequiredService<ILogger<Program>>();
-                   logger.LogError(ex,"AN ERROR OCCURED DURING MIGRATION");
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "AN ERROR OCCURED DURING MIGRATION");
                 }
             }
 
