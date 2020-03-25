@@ -8,9 +8,10 @@ interface IProps {
     activity: IActivity;
     createActivity: (activity: IActivity) => void;
     editActivity: (activity: IActivity) => void;
+    submitting:boolean
 }
 
-export const ActivityForm: React.FC<IProps> = ({ setEditMode, activity: initialeFormState, createActivity, editActivity }) => {
+export const ActivityForm: React.FC<IProps> = ({ setEditMode, activity: initialeFormState, createActivity, editActivity,submitting }) => {
 
     const initializeForm = () => {
         if (initialeFormState)
@@ -53,11 +54,11 @@ export const ActivityForm: React.FC<IProps> = ({ setEditMode, activity: initiale
                 <Form.Input onChange={handeInputChange} name='title' placeholder='Title' value={activity.title} />
                 <Form.TextArea onChange={handeInputChange} name='description' rows="2" value={activity.description} placeholder='Description' />
                 <Form.Input onChange={handeInputChange} name='category' value={activity.category} placeholder='Category' />
-                <Form.Input onChange={handeInputChange} name='date' value={activity.date} type="datetime-local" placeholder='Date' />
+                <Form.Input onChange={handeInputChange} name='date' value={activity.date} type="date" placeholder='Date' />
                 <Form.Input onChange={handeInputChange} name='city' value={activity.city} placeholder='City' />
                 <Form.Input onChange={handeInputChange} name='venue' value={activity.venue} placeholder='Venue' />
-                <Button floated="right" positive type="submit" content="Submit" />
-                <Button onClick={() => setEditMode(false)} floated="right" type="button" content="Cancel" />
+                <Button   loading={submitting} floated="right" positive type="submit" content="Submit" />
+                <Button  onClick={() => setEditMode(false)} floated="right" type="button" content="Cancel" />
             </Form>
         </Segment>
     )
